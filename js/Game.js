@@ -42,7 +42,9 @@ class Game {
 
   play(){
     form.hide();
-    
+
+    Player.getRank();
+
     Player.getPlayerInfo();
     
     if(allPlayers !== undefined){
@@ -93,6 +95,8 @@ class Game {
 
     if(player.distance > 3860){
       gameState = 2;
+      player.rank = player.rank + 1;
+      Player.updateRank(player.rank);
     }
    
     drawSprites();
@@ -100,5 +104,10 @@ class Game {
 
   end(){
     console.log("Game Ended");
+    console.log(player.rank);
+
+    if (Player.getRank() === 4) {
+      text("Leader Board", displayWidth/2 - 50, 50);
+    }
   }
 }
